@@ -1,0 +1,7 @@
+extends: standard
+plugins:
+  - standard
+rules:
+  no-extend-native: 0
+env:
+  mocha: true
