@@ -1,0 +1,2 @@
+# allora
+Promisify everything
