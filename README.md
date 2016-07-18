@@ -40,4 +40,4 @@ Promise.all([p1, p2, p3]).then(() => alert('We are all done!'))
 
 ## "allora" meaning
 
-"allora" is the Italian word for `then`
+"allora" is the Italian :it: word for `then`
