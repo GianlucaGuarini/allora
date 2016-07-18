@@ -1,5 +1,11 @@
 # allora
 
+[![Build Status][travis-image]][travis-url]
+
+[![NPM version][npm-version-image]][npm-url]
+[![NPM downloads][npm-downloads-image]][npm-url]
+[![MIT License][license-image]][license-url]
+
 Promisify everything in less tha ~50 lines
 It can be used to use promises on any javascript object.
 
@@ -41,3 +47,16 @@ Promise.all([p1, p2, p3]).then(() => alert('We are all done!'))
 ## "allora" meaning
 
 "allora" is the Italian :it: word for `then`
+
+
+
+[travis-image]:https://img.shields.io/travis/GianlucaGuarini/allora.svg?style=flat-square
+[travis-url]:https://travis-ci.org/GianlucaGuarini/allora
+
+[license-image]:http://img.shields.io/badge/license-MIT-000000.svg?style=flat-square
+[license-url]:LICENSE.txt
+
+[npm-version-image]:http://img.shields.io/npm/v/allora.svg?style=flat-square
+[npm-downloads-image]:http://img.shields.io/npm/dm/allora.svg?style=flat-square
+[npm-url]:https://npmjs.org/package/allora
+
