@@ -4,7 +4,7 @@ function isOnCallback (str) {
 
 function isTimer (fn) {
   var name = fn.name === 'valueOf' ? fn.name : fn.toString()
-  return /set[Timeout|Interval|Immediate]|requestAnimationFrame|timer/.test(name)
+  return /set[Timeout|Interval|Immediate]|requestAnimationFrame|requestIdleCallback|timer/.test(name)
 }
 
 /**
