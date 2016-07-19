@@ -58,6 +58,7 @@ describe('core', function () {
         globalValue = true
       })
       expect(timeout.valueOf()).to.be.equal(Number(timeout))
+      expect(timeout.toString()).to.be.equal(String(timeout))
       
       coolGlobal.setTimeout(1000).then(() => {
         expect(globalValue).to.be.equal(false)
