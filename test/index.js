@@ -42,10 +42,10 @@ describe('core', function () {
 
   it('Promisable native methods', function (done) {
     const coolGlobal = allora(global)
-    Promise.race([
+    Promise.all([
       coolGlobal.setImmediate(),
       coolGlobal.setTimeout(200),
-      coolGlobal.setTimeout(400)
+      coolGlobal.setTimeout(500)
     ]).then(() => done())
   })
 })

@@ -2,11 +2,6 @@ function isOnCallback (str) {
   return typeof str === 'string' && /^on(.+)/.test(str)
 }
 
-function isTimer (fn) {
-  var name = fn.name === 'valueOf' ? fn.name : fn.toString()
-  return /set[Timeout|Interval|Immediate]|requestAnimationFrame|requestIdleCallback|timer/.test(name)
-}
-
 /**
  * Function called recursively on all the object properties
  * If a property is a function we make it promisable
@@ -35,8 +30,10 @@ function makePromisable (parent, prop) {
     //  and many other native node methods
     apply: (target, thisArg, argumentsList) => {
       return new Promise((resolve, reject) => {
+        // guessing the timer functions from the type of arguments passed to the method
+        const isTimer = !argumentsList.length || typeof argumentsList[0] === 'number'
         // assuming the callback will be always the second argument
-        argumentsList.splice(!argumentsList.length || isTimer(target) ? 0 : 1, 0, resolve)
+        argumentsList.splice(isTimer ? 0 : 1, 0, resolve)
         Reflect.apply(target, parent, argumentsList)
       })
     }

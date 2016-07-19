@@ -1,6 +1,6 @@
 {
   "name": "allora",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Promisify everything",
   "main": "index.js",
   "scripts": {
