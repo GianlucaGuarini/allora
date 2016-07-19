@@ -44,7 +44,7 @@ p3.then(() => alert('frame'))
 Promise.all([p1, p2, p3]).then(() => alert('We are all done!'))
 ```
 
-### Clear timer eventyally
+### Clear timers
 Thanks to [this pull request](https://github.com/GianlucaGuarini/allora/pull/3) it's now also possible to clear the timers
 ```js
 const myWindow = allora(window)
