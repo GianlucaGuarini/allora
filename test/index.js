@@ -1,11 +1,8 @@
 const allora = require('../')
 
 const chai = require('chai')
-// const sinon = require('sinon')
-const sinonChai = require('sinon-chai')
-const EventEmitter = require('events')
 const expect = chai.expect
-chai.use(sinonChai)
+const EventEmitter = require('events')
 
 describe('core', function () {
   var emitter
@@ -47,5 +44,12 @@ describe('core', function () {
       coolGlobal.setTimeout(200),
       coolGlobal.setTimeout(500)
     ]).then(() => done())
+  })
+
+  it('Reject the promise', function (done) {
+    const coolGlobal = allora(global)
+    coolGlobal.setImmediate().then(() => {
+      throw new Error('Random error')
+    }).catch(() => done())
   })
 })

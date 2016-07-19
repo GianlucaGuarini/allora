@@ -44,6 +44,15 @@ p3.then(() => alert('frame'))
 Promise.all([p1, p2, p3]).then(() => alert('We are all done!'))
 ```
 
+### Clear timer eventyally
+Thanks to [this pull request](https://github.com/GianlucaGuarini/allora/pull/3) it's now also possible to clear the timers
+```js
+const myWindow = allora(window)
+const timer = myWindow.setTimeout(3000)
+timer.then(_ => console.log('time over'))
+clearTimeout(timer)
+```
+
 ## "allora" meaning
 
 "allora" is the Italian :it: word for `then`
