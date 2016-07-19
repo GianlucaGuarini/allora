@@ -9,7 +9,7 @@ function isOnCallback (str) {
  * @param   { String } prop - property we are trying to get from the parent object
  * @returns { Proxy }
  */
-function makePromisable (parent, prop) {
+function allora (parent, prop) {
   return new Proxy(prop ? parent[prop] : parent, {
     get: (target, property) => {
       // no function no need for promises in return
@@ -23,7 +23,7 @@ function makePromisable (parent, prop) {
         return target[property]
       } else {
         // make proxy also the nested object properties
-        return makePromisable(target, property)
+        return allora(target, property)
       }
     },
     // this is cool to make promiseable event emitters
@@ -45,4 +45,4 @@ function makePromisable (parent, prop) {
   })
 }
 
-module.exports = exports.default = (object) => makePromisable(object)
+module.exports = exports.default = (object) => allora(object)

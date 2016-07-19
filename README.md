@@ -50,7 +50,9 @@ Thanks to [this pull request](https://github.com/GianlucaGuarini/allora/pull/3) 
 const myWindow = allora(window)
 const timer = myWindow.setTimeout(3000)
 timer.then(_ => console.log('time over'))
-clearTimeout(timer)
+// the valueOf call should be not needed here
+// but if you are on node, you will need it https://github.com/nodejs/node/issues/7792
+clearTimeout(timer.valueOf())
 ```
 
 ## "allora" meaning
