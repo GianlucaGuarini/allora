@@ -38,7 +38,7 @@ function makePromisable (parent, prop) {
         returnValue = Reflect.apply(target, parent, argumentsList)
       })
       // Return the returnValue through valueOf
-      promise.valueOf = _ => returnValue
+      promise.valueOf = () => returnValue
       return promise
     }
   })
