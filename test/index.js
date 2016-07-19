@@ -48,4 +48,19 @@ describe('core', function () {
       coolGlobal.setTimeout(500)
     ]).then(() => done())
   })
+  
+  it('Returns the return value via valueOf', function (done) {
+      const coolGlobal = allora(global)
+      let globalValue = false
+      
+      const timeout = coolGlobal.setTimeout(500)
+      timeout.then(() => {
+        globalValue = true
+      })
+      expect(timeout.valueOf()).to.be.equal(Number(timeout))
+      
+      coolGlobal.setTimeout(1000).then(() => {
+        expect(globalValue).to.be.equal(false)
+      })
+  })
 })
