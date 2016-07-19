@@ -29,13 +29,17 @@ function makePromisable (parent, prop) {
     // this is cool to make promiseable event emitters
     //  and many other native node methods
     apply: (target, thisArg, argumentsList) => {
-      return new Promise((resolve, reject) => {
+      let returnValue
+      const promise = new Promise((resolve, reject) => {
         // guessing the timer functions from the type of arguments passed to the method
         const isTimer = !argumentsList.length || typeof argumentsList[0] === 'number'
         // assuming the callback will be always the second argument
         argumentsList.splice(isTimer ? 0 : 1, 0, resolve)
-        Reflect.apply(target, parent, argumentsList)
+        returnValue = Reflect.apply(target, parent, argumentsList)
       })
+      // Return the returnValue through valueOf
+      promise.valueOf = _ => returnValue
+      return promise
     }
   })
 }
