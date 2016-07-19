@@ -52,4 +52,20 @@ describe('core', function () {
       throw new Error('Random error')
     }).catch(() => done())
   })
+
+  it('Can clear properly the timer', function (done) {
+    const coolGlobal = allora(global)
+    const timer = coolGlobal.setTimeout(200)
+
+    var count = 0
+
+    timer.then(_ => count++)
+
+    clearTimeout(timer.valueOf())
+
+    setTimeout(function () {
+      expect(count).to.be.equal(0)
+      done()
+    }, 1000)
+  })
 })

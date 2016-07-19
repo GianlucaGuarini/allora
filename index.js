@@ -39,6 +39,7 @@ function makePromisable (parent, prop) {
       })
       // Return the returnValue through valueOf
       promise.valueOf = () => returnValue
+      promise.toString = () => returnValue
       return promise
     }
   })
