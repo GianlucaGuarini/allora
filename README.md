@@ -14,28 +14,28 @@ It can be used to use promises on any javascript object.
 ### Basic
 Or simply:
 ```js
-const myWindow = allora(window)
-myWindow.onload.then(() => alert('I am ready!'))
+const w = allora(window)
+w.onload.then(() => alert('I am ready!'))
 ```
 
 ### Example in Node:
 ```js
 const allora = require('allora')
-const myGlobal = allora(global)
-Promise.race([
-  myGlobal.setImmediate(),
-  myGlobal.setTimeout(200),
-  myGlobal.setTimeout(400)
+const g = allora(global)
+Promise.all([
+  g.setImmediate(),
+  g.setTimeout(200),
+  g.setTimeout(400)
 ]).then(() => done())
 
 ```
 
 ### Example in browser:
 ```js
-const myWindow = allora(window)
-const p1 = myWindow.setTimeout(500)
-const p2 = myWindow.setTimeout(5000)
-const p3 = myWindow.requestAnimationFrame()
+const w = allora(window)
+const p1 = w.setTimeout(500)
+const p2 = w.setTimeout(5000)
+const p3 = w.requestAnimationFrame()
 
 p1.then(() => alert('I am ready'))
 p2.then(() => alert('I am late'))
@@ -47,13 +47,23 @@ Promise.all([p1, p2, p3]).then(() => alert('We are all done!'))
 ### Clear timers
 Thanks to [this pull request](https://github.com/GianlucaGuarini/allora/pull/3) it's now also possible to clear the timers
 ```js
-const myWindow = allora(window)
-const timer = myWindow.setTimeout(3000)
+const w = allora(window)
+const timer = w.setTimeout(3000)
 timer.then(_ => console.log('time over'))
 // the valueOf call should be not needed here
 // but if you are on node, you will need it https://github.com/nodejs/node/issues/7792
 clearTimeout(timer.valueOf())
 ```
+
+### Event streams
+`Allora` does not allow you to do event streams since Promises could be only once fulfilled.
+```js
+const w = allora(window)
+const polling = w.setInterval(3000)
+polling.then(() => console.log('This will called only once!!!'))
+
+```
+However my friend [@nilssolanki](https://github.com/nilssolanki) made [stroxy](https://github.com/nilssolanki/stroxy) to provide an elegant streaming api to any javascript object. I would highly recommend you `stroxy` if you are looking a lightweight events streaming library similar to `allora`.
 
 ## "allora" meaning
 
