@@ -6,8 +6,7 @@
 [![NPM downloads][npm-downloads-image]][npm-url]
 [![MIT License][license-image]][license-url]
 
-Promisify everything in less tha ~50 lines
-It can be used to use promises on any javascript object.
+Promisify everything in less than ~50 lines. It can be used to implement promises on any JavaScript object.
 
 ## Examples
 
