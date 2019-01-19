@@ -59,7 +59,7 @@ clearTimeout(timer.valueOf())
 ```js
 const w = allora(window)
 const polling = w.setInterval(3000)
-polling.then(() => console.log('This will called only once!!!'))
+polling.then(() => console.log('This will be called only once!!!'))
 
 ```
 However my friend [@nilssolanki](https://github.com/nilssolanki) made [stroxy](https://github.com/nilssolanki/stroxy) to provide an elegant streaming api to any javascript object. I would highly recommend you `stroxy` if you are looking a lightweight events streaming library similar to `allora`.
