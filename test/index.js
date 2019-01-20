@@ -5,35 +5,51 @@ const expect = chai.expect
 const EventEmitter = require('events')
 
 describe('core', function () {
-  var emitter
-
-  beforeEach(function () {
-    emitter = allora(new EventEmitter())
-  })
-
   it('It can properly subscribe to custom APIs callbacks', function (done) {
-    emitter.on('foo').then(() => {
+    const emitter = new EventEmitter()
+
+    allora(emitter).on('foo').then(() => {
       done()
-    })
+    }).catch(err => { throw new Error(err) })
+
     emitter.emit('foo')
   })
 
+  it('The arguments are properly forwarded', (done) => {
+    const emitter = new EventEmitter()
+    const alloraEmitter = allora(emitter)
+
+    alloraEmitter.on('test').then((...args) => {
+      expect(args).to.be.an('array')
+      expect(args).to.be.have.lengthOf(1)
+      expect(args[0]).to.be.equal('args[0] should be this text')
+      done()
+    })
+
+    emitter.emit('test', 'args[0] should be this text')
+  })
+
   it('Allow combining multiple promises', function (done) {
-    const emitter2 = allora(new EventEmitter())
+    const emitter = new EventEmitter()
+    const emitter2 = new EventEmitter()
+    const alloraEmitter = allora(emitter)
+    const alloraEmitter2 = allora(emitter2)
 
     Promise.all([
-      emitter.on('foo'),
-      emitter2.on('foo')
-    ]).then(() => done())
+      alloraEmitter.on('foo'),
+      alloraEmitter2.on('foo')
+    ]).then(() => done()).catch(err => { throw new Error(err) })
 
-    emitter.on('foo').then((val) => {
+    alloraEmitter.on('foo').then((val) => {
       expect(val).to.be.equal(1)
-    })
+    }).catch(err => { throw new Error(err) })
+
     emitter.emit('foo', 1)
 
-    emitter2.on('foo').then((val) => {
+    alloraEmitter2.on('foo').then((val) => {
       expect(val).to.be.equal(2)
-    })
+    }).catch(err => { throw new Error(err) })
+
     emitter2.emit('foo', 2)
   })
 
